@@ -1,0 +1,1453 @@
+#include<fstream.h>
+#include<iomanip.h>
+#include<conio.h>
+#include<stdio.h>
+#include<dos.h>
+#include<string.h>
+//*******F L I P K A R T********
+ const int N=20;
+ void Display_ordr();
+ void Place_ordr();
+ void main_pr();
+ void sign_in();
+ void create_account();
+ void cash_memo();
+
+  struct cart
+ {
+   char name[150];
+   long int price;
+ }cart1,cart2[10];
+
+ class CUSTOMER
+ {
+    char custname[20],email_id[40];
+    char custadd[40],lndmrk[20];
+    long phno,pncd;
+    char password[10];
+
+  public:
+    void readdata()
+      {
+	cout<<"\n\t\t\tEnter Details";
+	cout<<"\n\nEmail id:";
+	gets(email_id);
+	cout<<"Password:";
+	cin>>password;
+	cout<<"Name:";
+	gets(custname);
+	cout<<"Address:";
+	gets(custadd);
+	cout<<"Landmark:";
+	gets(lndmrk);
+	cout<<"Contact:";
+	cin>>phno;
+	cout<<"Pincode:";
+	cin>>pncd;
+       }
+      void displaydata()
+       {cout<<"\n\nEmail id:";
+	puts(email_id);
+	cout<<"Password:";
+	puts(password);
+	cout<<"Name:";
+	puts(custname);
+	cout<<"Address:";
+	puts(custadd);
+	cout<<"Landmark:";
+	puts(lndmrk);
+	cout<<"Contact:"<<phno<<endl;
+	cout<<"Pincode:"<<pncd<<endl;
+       }
+      long int retphno()
+       {
+	return phno;
+       }
+       char *rpass()
+	 {
+		char t[40];
+		strcpy(t,password);
+		return t;
+	 }
+       char *reid()
+	{
+	   char tp[40];
+	   strcpy(tp,email_id);
+	   return tp;
+	}
+    };
+
+  struct product
+  { int sr;
+    char name[150];
+    long int price;
+  };
+ product prod[300] =
+   {
+     //ELECTRONICS
+       //LAPTOP
+	 //Dell
+       {1,"Inspiron 3421 ",24000},
+       {2,"Inspiron 3521 ",23990},
+       {3,"Inspiron 2520 ",33459},
+       {4,"Inspiron 3521 ",31610},
+       {5,"Inspiron 3321 ",34156},
+       {6,"Alienware 3521",29433},
+       {7,"Inspiron 5521 ",46990},
+       {8,"Vostro 2520   ",39800},
+       {9,"Inspiron 3000 ",23991},
+       {10,"Vostro 2520  ",37599},
+
+
+	 //Sony
+       {11,"Vaio E11115",27990},
+       {12,"Vaio E14111",28990},
+       {13,"Vaio T11113",49990},
+       {14,"Vaio Z13115",179900},
+       {15,"Vaio S13115",64000},
+       {16,"Vaio S13A15",64990},
+
+	  //Lenovo
+       {17,"A10 59-385921 Slatebook    ",14390},
+       {18,"Essential G500 59-380324   ",26834},
+       {19,"Ideapad S210 T 59-379242   ",28746},
+       {20,"Essentail G505 59-379528   ",21895},
+       {21,"Essential G505 59-379446   ",21259},
+       {22,"Essential G500 59-370339   ",42976},
+       {23,"Essential G500 59-380754   ",32130},
+
+	 //Apple
+       {24,"Air MD760HN-A MacBook   ",61990},
+       {25,"ME665HN-A MacBook Pro   ",174990},
+       {26,"ME294HN-A Macbook Pro   ",73990},
+       {27,"Retina ME664HNA MacBook ",155900},
+       {28,"MD712HN-B MacBook Air   ",64000},
+       {29,"ME864HN-A Macbook Pro   ",64990},
+       {30,"MD761HN-B MacBook Air   ",112000},
+
+
+       //TV
+	 //Sony Bravia
+       {31,"KDL-42 W700B LED    ",57740},
+       {32,"KDL-24 W600A LED    ",21490},
+       {33,"KD-84 X9000 LED     ",157634},
+       {34,"KDL-40 W900 HD 3D   ",69879},
+       {35,"KDL-55 W950A 3D     ",157277},
+       {36,"KDL-32 W700B HD LED ",40604},
+       {37,"KDL-46 W957 HD LED  ",104900},
+       {38,"KDL-46 W700A 3D     ",89000},
+       {39,"KD-65 X9004 3D 4K   ",349772},
+       {40,"KD-55 X9004 3D 4K   ",198000},
+
+       //LG
+       {41,"55EA9800 Full HD Curved OLED       ",492871},
+       {42,"42LN5710 42 Inch Full HD Smart LED ",55828},
+       {43,"32LN571B 32 Inch HD LED            ",32791},
+       {44,"42LA6910 42 Inch Full HD 3D        ",76569},
+       {45,"42LA6620 Full HD 3D LED            ",75236},
+       {46,"32LN5400 32 Inch HD LED            ",33006},
+
+	//Samsung
+       {47,"Full HD 55H8000 3D LED TV         ",214900},
+       {48,"55ES8000 55 Inches LED 3D         ",193249},
+       {49,"23 Inch HD LED UA23F4003          ",12949},
+       {50,"40 Inch Full HD 3D LED UA40F6400AR",59249},
+       {51,"32 Inch Full HD LED UA32F5500AR   ",36900},
+       {52,"HD LED 32F4000                    ", 27593},
+       {53,"40EH5000 40 Inches LED            ",43741},
+
+	//CAMERA
+	 //Nikon
+       {54,"Coolpix L30  ",4699},
+       {55,"Coolpix L820 ",14980},
+       {56,"Coolpix L27  ",4342},
+       {57,"Coolpix L320 ",10331},
+       {58,"Coolpix L28  ",5177},
+       {59,"Coolpix L830 ",12500},
+	  //Sony
+       {60,"CyberShot DSC-W730      ", 6490},
+       {61,"CyberShot DSC-W710      ",6490},
+       {62,"CyberShot DSC-H200      ",12790},
+       {63,"Cybershot DSC-W630      ",7233},
+       {64,"CyberShot DSC-HX300     ",26000},
+       {65,"CyberShot DSC-RX1 Mirror",174900},
+       {66,"Cybershot DSC-W630      ",7233},
+
+	  //Canon
+       {67,"PowerShot SX160   ",9500},
+       {68,"PowerShot A2500   ",4700},
+       {69,"PowerShot S10 HS",13500},
+       {70,"IXUS 255 HS       ",19999},
+       {71,"IXUS 155          ",7560},
+       {72,"PowerShot A2600   ",9299},
+       {73,"PowerShot A3400   ",12465},
+       {74,"IXUS 115 HS       ",8128},
+       {75,"PowerShot G1 X    ",16690},
+       {76,"Powershot S200    ",16856},
+
+	  //MOBILE
+	    //Nokia
+       {77,"Lumia 520       ",7199},
+       {78,"Lumia 525       ",8704},
+       {79,"220             ",2550},
+       {80,"Lumia 1020 (EOS)",43690},
+       {81,"Lumia 1520      ",35490},
+       {82,"Lumia 920       ",27999},
+       {83,"Lumia 925       ",22999},
+       {84,"Lumia 820       ",18900},
+
+	  //Samsung
+       {85,"Galaxy S3              ",19999},
+       {86,"Galaxy Note 2          ",23560},
+       {87,"Galaxy Trend Duos S7392",6299},
+       {88,"Galaxy Grand Quattro   ",12465},
+       {89,"Galaxy Note 3          ",35128},
+       {90,"Galaxy Grand           ",16690},
+       {91,"Galaxy Grand           ",16690},
+       {92,"Galaxy Grand           ",16690},
+       {93,"Galaxy S4 Mini         ",16856},
+       {94,"Galaxy S2 I9100        ",27600},
+
+	  //Apple
+       {95,"IPhone 5S 64GB   ",57233},
+       {96,"IPhone 5S 32GB   ",57000},
+       {97,"IPhone 5 64GB    ",48995},
+       {98,"IPhone 5C 32GB   ",41000},
+       {99,"IPhone 4S 16GB   ",38500},
+       {100,"IPhone 5 32GB   ",34749},
+       {101,"IPhone 5C(White)",46690},
+       {102,"IPhone 5C(Cyan) ",48619},
+       {103,"IPhone 4 16GB   ",26999},
+       //MENS
+      //T-SHIRTS
+       {104,"United Colors of Benetton Men's Solid Casual Shirt",1899},
+       {105,"Global Nomad Men's Checkered Casual Shirt         ",674},
+       {106,"United Colors of Benetton Men's Solid Casual Shirt",2099},
+       {107,"United Colors of Benetton Men's Solid Casual Shirt",2099},
+       {108,"United Colors of Benetton Men's Checkered Casual Shirt",2599},
+       {109,"United Colors of Benetton Men's Solid Casual Shirt",2099},
+       {110,"United Colors of Benetton Men's Checkered Casual Shirt",2599},
+       {111,"Levi's Men's Solid Casual Shirt                   ",2299},
+       {112,"United Colors of Benetton Men's Solid Casual Shirt",1899},
+       {113,"Levi's Men's Checkered Casual Shirt               ",2299},
+       {114,"U.S. Polo Assn. Men's Solid Casual Shirt          ",1759},
+       {115,"United Colors of Benetton Men's Solid Casual Shirt",2099},
+       {116,"Global Nomad Men's Checkered Casual Shirt         ",674},
+       {117,"United Colors of Benetton Men's Checkered Casual Shirt",2599},
+       {118,"United Colors of Benetton Men's Solid Casual Shirt",1899},
+       //JEANS
+       {119,"Lee Slim Fit Men's Jeans                          ",2632},
+       {120,"Levi's Slim Fit Men's Jeans                       ",5000},
+       {121,"Levi's 511 Slim Fit Men's Jeans                   ",1799},
+       {122,"Levi's Slim Fit Men's Jeans                       ",3144},
+       {123,"Levi's Skinny Fit Men's Jeans                     ",3144},
+       {124,"Lee Slim Fit Men's Jeans                          ",2462},
+       {125,"French Connection Regular Fit Men's Jeans         ",3748},
+       {126,"PEPE Skinny Fit Men's Jeans                       ",2399},
+       {127,"Lee Skinny Fit Men's Jeans                        ",1612},
+       {128,"Lee Slim Fit Men's Jeans                          ",2547},
+       {129,"Flying Machine Slim Fit Men's Jeans               ",1444},
+       {130,"Lee Skinny Fit Men's Jeans                        ",1697},
+       {131,"PEPE Skinny Fit Men's Jeans                       ",2639},
+       {132,"Levi's Regular Fit Men's Jeans                    ",3144},
+       {133,"PEPE Skinny Fit Men's Jeans                       ",2399},
+       // SHOES
+       {134,"Reebok Zigkick Dual Running Shoes                 ",5599},
+       {135,"Reebok Realflex Run 2.0 Tempo Running Shoes       ",5599},
+       {136,"Adidas Hustle Basketball Shoes                    ",3599},
+       {137,"Puma Running Shoes                                ",2399},
+       {138,"Puma Running Shoes                                ",1749},
+       {139,"Puma Lumeia Running Shoes                         ",5499},
+       {140,"Reebok Turbo Lite Lp Running Shoes                ",1999},
+       {141,"Puma Running Shoes                                ",1724},
+       {142,"Puma Running Shoes                                ",1724},
+       {143,"Puma Running Shoes                                ",1724},
+       {144,"Adidas Sports Hiker Outdoor Shoes                 ",4399},
+       {145,"Reebok Run Start LP Running Shoes                 ",2339},
+       {146,"Reebok Vision Speed Lp Running Shoes              ",3679},
+       {147,"Reebok Blaze Run Lp Running Shoes                 ",3599},
+       {148,"Puma Axis Running Shoes                           ",2799},
+       //WOMENS
+	//TOPS N TUNICS
+
+       {149,"Vaak Casual 3/4 Sleeve Solid Women's Top          ",599},
+       {150,"U&F Casual 3/4 Sleeve Solid Women's Top           ",399},
+       {151,"Vaak Women's Solid Casual Shirt                   ",749},
+       {152,"U&F Casual 3/4 Sleeve Solid Women's Top           ",399},
+       {153,"U&F Casual 3/4 Sleeve Solid Women's Top           ",399},
+       {154,"U&F Casual 3/4 Sleeve Solid Women's Top           ",399},
+       {155,"Allen Solly Formal Short Sleeve Solid Women's Top ",974},
+       {156,"The Vanca Casual Roll-up Sleeve Solid Women's Top ",999},
+       {157,"Wills Lifestyle Casual 3/4 Sleeve Printed Women's Top",1999},
+       {158,"Vivaa Printed Georgette Women's Kaftan            ",499},
+       {159,"Allen Solly Formal Full Sleeve Solid Women's Top  ",1124},
+       {160,"Vivaa Printed Georgette Women's Kaftan            ",499},
+       {161,"Puma Casual Short Sleeve Printed Women's Top      ",769},
+       {162,"Karishma Party Short Sleeve Solid Women's Top     ",499},
+       {163,"GAS Casual Short Sleeve Solid Women's Top         ",2400},
+       //SARI
+       {164,"Fatkart Brasso Sari                               ",3999},
+       {165,"7 Rainbow Printed Embellished Georgette Sari      ",1499},
+       {166,"Bhavi Printed Silk Sari                           ",1490},
+       {167,"Designersareez Embroidered Sari                   ",969},
+       {168,"7 Rainbow Georgette Sari                          ",3999},
+       {169,"Ethnic Park Ethnic Sari                           ",1490},
+       {170,"7 Rainbow Self Design Silk Sari                   ",1499},
+       {171,"Taanshi Printed Georgette Sari                    ",1850},
+       {172,"Gitanjali Embellished Chiffon Sari                ",825},
+       {173,"Ishin Printed Crepe Sari                          ",1599},
+       {174,"Silkbazar Net Sari                                ",1496},
+       {175,"Taanshi Printed Georgette Sari                    ",3200},
+       {176,"7 Rainbow Printed Georgette Sari                  ",1499},
+       {177,"Kasish Net Sari                                   ",685},
+       {178,"Saree Swarg Printed Georgette Sari                ",990},
+       //DRESSES N SKIRTS
+       {179,"20D Women's Gathered Dress                        ",1195},
+       {180,"9rasa Printed Women's Broomstick Skirt            ",1799},
+       {181,"9rasa Printed Women's Broomstick Skirt            ",1599},
+       {182,"Rajasthani Sarees Printed Women's A-line Skirt    ",649},
+       {183,"Wills Lifestyle Women's Shift Dress               ",2999},
+       {184,"Avirate Women's Gathered Dress                    ",4000},
+       {185,"United Colors of Benetton Women's Gathered Dress  ",1874},
+       {186,"Cottinfab Women's A-line Dress                    ",749},
+       {187,"Wills Lifestyle Women's A-line Dress              ",3299},
+       {188,"Avirate Women's Layered Dress                     ",4000},
+       {189,"Avirate Women's Sheath Dress                      ",4500},
+       {190,"Faballey Women's Sheath Dress                     ",1350},
+       {191,"Faballey Women's A-line Dress                     ",1400},
+       {192,"9rasa Solid Women's Broomstick Skirt              ",2399},
+       {193,"Cottinfab Solid Women's Jumpsuit                  ",877},
+       // JEANS
+       {194,"Pepe Skinny Fit Women's Jeans                     ",1209},
+       {195,"Jealous 21 Skinny Fit Women's Jeans               ",1299},
+       {196,"Pepe Skinny Fit Women's Jeans                     ",1209},
+       {197,"High Star Slim Fit Women's Jeans                  ",799},
+       {198,"High Star Slim Fit Women's Jeans                  ",799},
+       {199,"Kraus Skinny Fit Women's Jeans                    ",1395},
+       {200,"Morph Maternity Women's Jeans                     ",1695},
+       {201,"Numero Uno Women's Jeans                          ",974},
+       {202,"Tokyo Talkies Slim Fit Women's Jeans              ",1000},
+       {203,"Wrangler Slim Fit Women's Jeans                   ",1995},
+       {204,"Kraus Skinny Fit Women's Jeans                    ",1795},
+       {205,"High Star Slim Fit Women's Jeans                  ",799},
+       //FOOTWEAR
+       {206,"Catwalk Flats                                     ",995},
+       {207,"Catwalk Flats                                     ",995},
+       {208,"Catwalk Flats                                     ",995},
+       {209,"Catwalk Flats                                     ",995},
+       {210,"Clarks Flats                                      ",3999},
+       {211,"Pavers England Flats                              ",999},
+       {212,"Do Bhai Flats                                     ",399},
+       {213,"Babylon Buckle Wedges                             ",777},
+       {214,"Bata Flats                                        ",699},
+       {215,"Bata Flats                                        ",799},
+       {216,"Carlton London Flats                              ",774},
+       {217,"GoBahamas Flats                                   ",449},
+       {218,"Lavie Flats                                       ",954},
+       {219,"Puma Simppy Flats                                 ",907},
+       {220,"Inc.5 Flats                                       ",1690},
+       {221,"Do Bhai Wedges                                    ",449},
+       {222,"Mochi Flats                                       ",1490},
+       {223,"Inc.5 Flats                                       ",799},
+       {224,"Do Bhai Flats                                     ",449},
+       {225,"Inc.5 Flats                                       ",1990},
+       {226,"Bonjour Wedges                                    ",1199},
+       {227,"Do Bhai Flats                                     ",449},
+       {228,"Carlton London Flats                              ",1393},
+       {229,"Do Bhai Flats                                     ",449},
+       {230,"Khadim's Her Majesty Heels                        ",899},
+       {231,"Inc.5 Flats                                       ",1215},
+       {232,"Do Bhai Heels                                     ",799},
+       {233,"Do Bhai Heels                                     ",799},
+       {234,"Do Bhai Wedges                                    ",449},
+       {235,"Metro 32 Heels                                    ",1190},
+       //BOOKS
+       {236,"Half Girlfriend (English) -Chetan Bhagat         ",149},
+       {237,"Life is What you Make It (English) -Preeti Shenoy",55},
+       {238,"Fault in Our Stars (English) -Green John         ",285},
+       {239,"When Only Love Remains (English) -Durjoy Datta   ",137},
+       {240,"Indian Polity (English) -M Laxmikanth            ",421},
+       {241,"The Fault in Our Stars (English) -John Green     ",280},
+       {242,"The Monk Who Sold His Ferrari(English) -Robin Sharma",109},
+       {243,"I Too Had a Love Story (English) -Ravinder Singh ",76},
+       {244,"Lucents General Knowledge (English) -Vinay Karna ",118},
+       {245,"The Secret Of Nagas (English) -Amish Tripathi",172},
+       //MOVIES
+       {246,"2 States (Movie, DVD)                               ",280},
+       {247,"Queen (Movie, DVD)                                  ",209},
+       {248,"Frozen (Movie, DVD)                                 ",299},
+       {249,"Ek Villain (Movie, DVD)                             ",233},
+       {250,"Holiday (Movie, DVD)                                ",219},
+       {251,"Highway (Movie, DVD)                                ",227},
+       {252,"The Lunchbox (Movie, DVD)                           ",399},
+       {253,"Shilpa's Yoga (Movie, DVD)                          ",209},
+       {254,"Bipasha Basu Love Yourself:3 DVD                    ",522},
+       {255,"The Fault In Our Stars (Movie, DVD)                 ",489},
+       {256,"Andaz Apna Apna (Movie, DVD)                        ",149},
+       {257,"Bipasha Basu - Love Yourself Fit                    ",230},
+       {258,"Gravity (Movie, DVD)                                ",299},
+       {259,"Dhoom: 3 (Movie, DVD)                               ",279},
+       {260,"Captain America - The Winter Soldier                ",448},
+       {261,"Drishyam (Movie, DVD)                               ",105},
+       {262,"The Art Of Eating Right                             ",240},
+       {263,"City Lights (Movie, DVD)                            ",225},
+       {264,"Prenatal Yoga With Lara                             ",295},
+       {265,"The Secret (Movie, DVD)                             ",489},
+       //GAMES
+       {266,"Grand Theft Auto V (Games, PS3)                     ",2499},
+       {267,"Grand Theft Auto IV (Games, PC)                     ",499},
+       {268,"Football Manager 2014 (Standard Edition)            ",1348},
+       {269,"Counter Strike: Global                              ",525},
+       {270,"FIFA 15 (Games, PS3)                                ",3499},
+       {271,"Watch Dogs (Special Edition) (Games, PS3)           ",3390},
+       {272,"Assassin's Creed Liberation - HD (Games, PC)        ",499},
+       {273,"Assassin's Creed IV: Black Flag (Games, PS3)        ",1499},
+       {274,"Watch Dogs (Games, PC)                              ",1799},
+       {275,"FIFA 15 (Games, PS4)                                ",3999},
+       {276,"The Last Of Us : Remastered (Games, PS4)            ",2750},
+       {277,"Grand Theft Auto : San Andreas (Games, PC)          ",400},
+       {278,"Assassin's Creed: Unity (Games, PC)                 ",1799},
+       {279,"FIFA 12 (Games, PC)                                 ",499},
+       {280,"Grand Theft Auto IV                                 ",699},
+       {281,"Watch Dogs (Exclusive Edition)                      ",3499},
+       {282,"Grand Theft Auto V (Games, PS4)                     ",3499},
+       {283,"Don Bradman Cricket 11214,                          ",3299},
+       {284,"Sports Ultimate Collection                          ",998},
+       {285,"WWE 2K14 (Games, PS3)                               ",2499}
+
+     };
+ void Place_ordr()
+  {
+    clrscr();
+    CUSTOMER c1;
+    ofstream fout;
+    fout.open("flipordr.dat",ios::app|ios::binary);
+    c1.readdata();
+    fout.write((char*)&c1,sizeof(c1));
+    fout.close();
+    getch();
+  }
+
+ void Display_ordr()
+  { clrscr();
+    CUSTOMER c2;
+    long int b;
+    cout<<"Enter registered phone no:"<<endl;
+    cin>>b;
+    ifstream fin;
+    fin.open("flipordr.dat",ios::binary);
+      while(!fin.eof())
+       {
+	fin.read((char*)&c2,sizeof(c2));
+	  if(c2.retphno()==b)
+	  {
+	      c2.displaydata();
+	  }
+       }
+    fin.close();
+   }
+
+     int item=0;
+void cash_memo()
+{   clrscr();
+    cout<<"\t*****   *       ***  ** *   *   *     *     ****    *****\n";
+    cout<<"\t*       *        *   *   *  * *     *   *   *   *     *\n";
+    cout<<"\t***     *        *   ** *   * *     *****   ****      *\n";
+    cout<<"\t*       *****   ***  *      *   *   *   *   *   *     * \n";
+    cout<<"\t\t\t..The Offline Megastore..\n";
+    delay(500);
+     int count=1,memo=0,t,l1,o1;
+     long int bill=0;
+     char ans;
+     cout<<"             ======================="<<endl;
+     cout<<"                     FLIPKART"<<endl;
+     cout<<"             ======================="<<endl;
+     cout<<"                     Your Cart "<<endl;
+     cout<<"Sr.no"<<setw(30)<<"Product"<<setw(30)<<"Price"<<endl;
+     strcpy(cart2[item].name,cart1.name);
+     cart2[item].price=cart1.price;
+     item++;
+     for(l1=0,o1=1;l1<item;l1++,o1++)
+     {
+	cout<<o1<<setw(30)<<cart2[l1].name<<setw(30)<<cart2[l1].price<<endl;
+	memo++;
+     }
+     for(t=0,bill=0;t<memo;t++)
+
+     {
+       bill+=cart2[t].price;
+     }
+     cout<<endl<<endl<<" ---> Continue Shopping!! (y/n) :";
+     cin>>ans;
+     if(ans=='y')
+     {
+      count++;
+      clrscr();
+      main_pr();
+     }
+     else
+     {
+       cout<<endl<<endl<<" TOTAL BILL = "<<bill;
+       cout<<endl<<"THANK YOU ... for visiting !!!  HAVE A NICE DAY!!!";
+     }
+
+}
+
+void main_pr()
+{
+    delay(500);
+    cout<<"\t*****   *       ***  ** *   *   *     *     ****    *****\n";
+    cout<<"\t*       *        *   *   *  * *     *   *   *   *     *\n";
+    cout<<"\t***     *        *   ** *   * *     *****   ****      *\n";
+    cout<<"\t*       *****   ***  *      *   *   *   *   *   *     * \n";
+    cout<<"\t\t\t..The Offline Megastore..\n";
+    delay(500);
+    int a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,p1,s1,r=1,count=1;
+    char ans;
+    cout<<"\n\n\t\t\t\tENTER CHOICE";
+    delay(500);
+    cout<<"\n\n1.Electronics"<<setw(15);
+    delay(500);
+    cout<<"2.Men"<<setw(15);
+    delay(500);
+    cout<<"3.Women"<<setw(15);
+    delay(500);
+    cout<<"4.Books"<<setw(15);
+    delay(500);
+    cout<<"5.Media"<<endl;
+    delay(500);
+    cin>>a;
+    switch(a)  //1st switch
+       {
+	 case 1:{ delay(500);
+		  clrscr();//1
+		  delay(500);
+		  cout<<"\n\t\t\tELECTRONICS\n";
+		  delay(500);
+		  cout<<"\n\t\t1.Laptops\n";
+		  delay(500);
+		  cout<<"\n\t\t2.Television\n";
+		  delay(500);
+		  cout<<"\n\t\t3.Cameras\n";
+		  delay(500);
+		  cout<<"\n\t\t4.Mobiles\n";
+		  delay(500);
+		  cout<<"\nENTER CHOICE:";
+		  delay(500);
+		  cin>>b;
+		  switch(b)          //2nd switch
+		  {
+		     case 1:{  delay(500);
+			       clrscr();//2
+			       delay(500);
+			       cout<<"\n\tElectronics >> Laptops\n";
+			       delay(500);
+			       cout<<"\n\t\tSELECT BRAND:\n";
+			       delay(500);
+			       cout<<"\n\t\t\t1.Dell\n";
+			       delay(500);
+			       cout<<"\n\t\t\t2.Sony\n";
+			       delay(500);
+			       cout<<"\n\t\t\t3.Lenovo\n";
+			       delay(500);
+			       cout<<"\n\t\t\t4.Apple\n";
+
+			       cout<<"\n\tENTER CHOICE: ";
+			       delay(500);
+			       cin>>c;
+			       switch(c)
+			       {
+				 case 1:{ delay(500);
+					  clrscr();
+					  delay(500);
+					  cout<<"\n\tElectronics >> Laptops >>Dell\n";
+					  delay(500);
+					  cout<<"\nSr.no"<<setw(20)<<"Product"<<setw(20)<<"Price\n\n";
+					  for(d=0;d<10;d++)
+					   {
+					   delay(500);
+					   cout<<prod[d].sr<<setw(10)<<"\t"<<prod[d].name<<"\t\t"<<prod[d].price<<endl;
+					   }
+					   cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1>=1&&s1<=10)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[s1-1].name);
+						 cart1.price=prod[s1-1].price;
+					      }
+					      cash_memo();
+					    }
+
+					}//close switch 1 case 1 switch 2 case 1 switch 3 case 1
+					break ;
+				 case 2:{ delay(500);
+					  clrscr();
+					  delay(500);
+					  cout<<"\n\tElectronics >> Laptops >>Sony\n";
+					  delay(500);
+					  cout<<"\nSr.no"<<setw(20)<<"Product"<<setw(20)<<"Price\n\n";
+					  for(e=10,h=0;e<16;e++,h++)
+					   {
+					    delay(500);
+					    cout<<h+1<<setw(10)<<"\t"<<prod[e].name<<"\t\t"<<prod[e].price<<endl;
+					   }
+					   cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+10)-1].name);
+						 cart1.price=prod[(s1+10)-1].price;
+					      }
+					    }
+					    cash_memo();
+					  }//close switch 1 case 1 switch 2 case 1 switch 3 case 2
+					 break;
+				 case 3:{delay(500);
+					 clrscr();
+					 delay(500);
+					 cout<<"\n\tElectronics >> Laptops >>Lenovo\n";
+					 delay(500);
+					 cout<<"\nSr.no"<<setw(20)<<"Product"<<setw(20)<<"\t\t\tPrice\n\n";
+					  for(f=16,i=0;f<23;f++,i++)
+					   {
+					      delay(500);
+					      cout<<i+1<<setw(10)<<"\t"<<prod[f].name<<"\t\t"<<prod[f].price<<endl;
+					   }
+					   cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1>=1&&s1<=7)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+16)-1].name);
+						 cart1.price=prod[(s1+16)-1].price;
+					      }
+					    }
+					    cash_memo();
+					 }//close switch 1 case 1 switch 2 case 1 switch 3 case 3
+					 break;
+				 case 4:{delay(500);
+					 clrscr();
+					 delay(500);
+					 cout<<"\n\tElectronics >> Laptops >>Apple\n";
+					 delay(500);
+					 cout<<"\nSr.no"<<setw(20)<<"Product"<<setw(20)<<"Price\n\n";
+					 for(g=23,h=0;g<30;g++,h++)
+					 {
+					   delay(500);
+					   cout<<h+1<<setw(10)<<"\t"<<prod[g].name<<"\t\t"<<prod[g].price<<endl;
+					 }
+					 cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+23)-1].name);
+						 cart1.price=prod[(s1+23)-1].price;
+					      }
+					    }
+					    cash_memo();
+					}//close switch 1 case 1 switch 2 case 1 switch 3 case 4
+					break;
+				 default :{cout<<"Invalid entry:";}
+			       }
+			    }
+			    break;
+		    case 2:{
+				 delay(500);
+				 clrscr();//1
+				 delay(500);
+				 cout<<"\n\t\t\tELECTRONICS >>Television \n";
+				 delay(500);
+				 cout<<"\n\t\tSELECT BRAND:\n";
+				 delay(500);
+				 cout<<"\n\t\t\t1.Sony Bravia\n";
+				 delay(500);
+				 cout<<"\n\t\t\t2.LG\n";
+				 delay(500);
+				 cout<<"\n\t\t\t3.Samsung\n";
+				 delay(500);
+				 cout<<"\n\tENTER CHOICE: ";
+				 delay(500);
+				 cin>>n;
+				 switch(n)//1 switch
+				 {
+				    case 1:
+				    {
+					 delay(500);
+					 clrscr();
+					 delay(500);
+					 cout<<"\n\tElectronics >> Television >>Sony Bravia\n";
+					 delay(500);
+					 cout<<"\nSr.no"<<setw(18)<<"Product"<<setw(32)<<"Price\n\n";
+					 for(g=30,h=0;g<40;g++,h++)
+					 {
+					   delay(500);
+					   cout<<h+1<<setw(10)<<"\t"<<prod[g].name<<"\t\t"<<prod[g].price<<endl;
+					 }
+					 cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+30)-1].name);
+						 cart1.price=prod[(s1+30)-1].price;
+					      }
+					    }
+					     cash_memo();
+				    }
+				    break;
+				    case 2:
+				    {
+					 delay(500);
+					 clrscr();
+					 delay(500);
+					 cout<<"\n\tElectronics >> Television >>LG\n";
+					 delay(500);
+					 cout<<"\nSr.no"<<setw(18)<<"Product"<<setw(48)<<"Price\n\n";
+					 for(g=40,h=0;g<46;g++,h++)
+					 {
+					   delay(500);
+					   cout<<h+1<<setw(10)<<"\t"<<prod[g].name<<"\t\t"<<prod[g].price<<endl;
+					 }
+					 cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+40)-1].name);
+						 cart1.price=prod[(s1+40)-1].price;
+					      }
+					    }
+					    cash_memo();
+				    }
+				    break;
+			  case 3:
+				    {
+					 delay(500);
+					 clrscr();
+					 delay(500);
+					 cout<<"\n\tElectronics >> Television >>Samsung\n";
+					 delay(500);
+					 cout<<"\nSr.no"<<setw(18)<<"Product"<<setw(48)<<"Price\n\n";
+					 for(g=46,h=0;g<53;g++,h++)
+					 {
+					   delay(500);
+					   cout<<h+1<<setw(10)<<"\t"<<prod[g].name<<"\t\t"<<prod[g].price<<endl;
+					 }
+					 cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7)			   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+46)-1].name);
+						 cart1.price=prod[(s1+46)-1].price;
+					      }
+					    }
+					    cash_memo();
+				    }
+				    break;
+				 }
+			   }
+			   break;
+		    case 3:{
+			     clrscr();//2
+			     cout<<"\n\tElectronics >> Cameras\n";
+			     cout<<"\n\t\tSELECT BRAND:\n";
+			     cout<<"\n\t\t\t1.Nikon\n";
+			     cout<<"\n\t\t\t2.Sony\n";
+			     cout<<"\n\t\t\t3.Canon\n";
+			     cout<<"\n\tENTER CHOICE: ";
+			     int j;
+			     cin>>j;
+			     switch(j)       //3rd switch
+			     {
+			      case 1 :{clrscr();
+					 cout<<"\n\tElectronics >> Cameras >>Nikon\n";
+					 cout<<"\nSr.no"<<setw(20)<<"Product"<<setw(10)<<"\t\tPrice\n\n";
+					  for(int d=53,k=0;d<59;k++,d++)
+					   {
+					   cout<<k+1<<setw(10)<<"\t"<<prod[d].name<<"\t\t"<<prod[d].price<<endl;
+					   }
+					   cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+53)-1].name);
+						 cart1.price=prod[(s1+53)-1].price;
+					      }
+					    }
+					    cash_memo();
+					}//close switch 1 case 1 switch 2 case 3 switch 3 case 1
+					break;
+			      case 2 :{clrscr();
+					 cout<<"\n\tElectronics >> Cameras >>Sony\n";
+					 cout<<"\nSr.no"<<setw(20)<<"Product"<<setw(25)<<"\t\tPrice\n\n";
+					  for(int e=59,h=0;e<66;e++,h++)
+					   {
+					   cout<<h+1<<setw(10)<<"\t"<<prod[e].name<<"\t\t"<<prod[e].price<<endl;
+					   }
+					   cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+59)-1].name);
+						 cart1.price=prod[(s1+59)-1].price;
+					      }
+					    }
+					    cash_memo();
+					}//close switch 1 case 1 switch 2 case 3 switch 3 case 2
+					break;
+			       case 3 :{clrscr();
+					 cout<<"\n\tElectronics >> Cameras >>Canon\n";
+					 cout<<"\nSr.no"<<setw(20)<<"Product"<<setw(20)<<"\t\tPrice\n\n";
+					  for(int f=66,i=0;f<76;f++,i++)
+					   {
+					   cout<<i+1<<setw(10)<<"\t"<<prod[f].name<<"\t\t"<<prod[f].price<<endl;
+					   }
+					   cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+66)-1].name);
+						 cart1.price=prod[(s1+66)-1].price;
+					      }
+					    }
+					    cash_memo();
+					}//close switch 1 case 1 switch 2 case 3 switch 3 case 3
+					break;
+			      }//close switch 1 case 1 switch 2 case 3 switch 3
+			  }
+			  break;
+		  case 4:{
+			   clrscr();//2
+			   cout<<"\n\tElectronics >> Mobiles\n";
+			   cout<<"\n\t\tSELECT BRAND:\n";
+			   cout<<"\n\t\t\t1.Nokia\n";
+			   cout<<"\n\t\t\t2.Samsung\n";
+			   cout<<"\n\t\t\t3.Apple\n";
+			   cout<<"\n\tENTER CHOICE: ";
+			   int m;
+			   cin>>m;
+			     switch(m)       //3rd switch
+			     {
+			      case 1 :{clrscr();
+					 cout<<"\n\tElectronics >> Mobiles >>Nokia\n";
+					 cout<<"\nSr.no"<<setw(20)<<"Product"<<setw(20)<<"\t\tPrice\n\n";
+					  for(int d=76,k=0;d<84;k++,d++)
+					   {
+					   cout<<k+1<<setw(10)<<"\t"<<prod[d].name<<"\t\t"<<prod[d].price<<endl;
+					   }
+					   cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+76)-1].name);
+						 cart1.price=prod[(s1+76)-1].price;
+					      }
+					    }
+					    cash_memo();
+					}//close switch 1 case 1 switch 2 case 3 switch 3 case 1
+					break;
+				 case 2 :{clrscr();
+					 cout<<"\n\tElectronics >> Mobiles >>Samsung\n";
+					 cout<<"\nSr.no"<<setw(20)<<"Product"<<setw(20)<<"\t\tPrice\n\n";
+					  for(int e=84,h=0;e<94;e++,h++)
+					   {
+					   cout<<h+1<<setw(10)<<"\t"<<prod[e].name<<"\t\t"<<prod[e].price<<endl;
+					   }
+					   cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+84)-1].name);
+						 cart1.price=prod[(s1+84)-1].price;
+					      }
+					    }
+					    cash_memo();
+					  }//close switch 1 case 1 switch 2 case 3 switch 3 case 2
+					  break;
+				 case 3 :{clrscr();
+					 cout<<"\n\tElectronics >> Mobiles >>Apple\n";
+					 cout<<"\nSr.no"<<setw(20)<<"Product"<<setw(20)<<"\t\tPrice\n\n";
+					  for(int f=95,i=0;f<103;f++,i++)
+					   {
+					   cout<<i+1<<setw(10)<<"\t"<<prod[f].name<<"\t\t"<<prod[f].price<<endl;
+					   }
+					   cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+					   cin>>s1;
+					   cout<<endl<<endl<<"...Your order has been successfully placed..";
+
+					   if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9)
+					   {
+					      for(int p=r-1;p<count;p++,r++)
+					      {
+						 strcpy(cart1.name,prod[(s1+94)-1].name);
+						 cart1.price=prod[(s1+94)-1].price;
+					      }
+					    }
+					    cash_memo();
+					 }//close switch 1 case 1 switch 2 case 3 switch 3 case 3
+					 break;
+			      }
+			      }break;
+		  }
+		}
+		break;
+    case 2:{
+		   delay(500);
+		   clrscr();
+		   delay(500);
+		   cout<<"\n\tMens >> \n";
+		   delay(500);
+		   cout<<"\n\t\t\t1.Clothing\n";
+		   delay(500);
+		   cout<<"\n\t\t\t2.Footwear\n";
+		   delay(500);
+		   cout<<"\n\tENTER CHOICE:";
+		   delay(500);
+		   cin>>i;
+		   switch(i)//open 1 switch
+		   {
+		       case 1:
+		       {
+			  delay(500);
+			  clrscr();//1
+			  delay(500);
+			  cout<<"\n\tMens >>Clothing \n";
+			  delay(500);
+			  cout<<"\n\t\t\t1.T-Shirt\n\n\t\t\t2.Jeans\n\n\tENTER CHOICE:";
+			  delay(500);
+			  cin>>j;
+			  switch(j)//open 2 switch
+			  {  case 1:
+			     {
+				 delay(500);
+				 clrscr();//2
+				 delay(500);
+				 cout<<"\n\tMens >>Clothing>>T-Shirts \n";
+				 delay(500);
+				 cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+				 for(d=103,h=0;d<118;d++,h++)
+				 {
+				    delay(500);
+				    cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+				 }
+				 cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+				 cin>>s1;
+				 cout<<endl<<endl<<"...Your order has been successfully placed..";
+				 if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10||s1==11||s1==12||s1==13||s1==14||s1==15||s1==16)
+				 {
+				   for(int p=r-1;p<count;p++,r++)
+				   {
+				     strcpy(cart1.name,prod[(s1+103)-1].name);
+				     cart1.price=prod[(s1+103)-1].price;
+				   }
+				 }
+				 cash_memo();
+			     }//close 2 switch 1 case
+			     break;
+			     case 2:
+			     {
+				 delay(500);
+				 clrscr();//2
+				 delay(500);
+				 cout<<"\n\tMens >>Clothing>>Jeans \n";
+				 delay(500);
+				 cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+				 for(d=118,h=0;d<133;d++,h++)
+				 {
+				    delay(500);
+				    cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+				 }
+				 cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+				 cin>>s1;
+				 cout<<endl<<endl<<"...Your order has been successfully placed..";
+				 if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10||s1==11||s1==12||s1==13||s1==14||s1==15)
+				    {
+				      for(int p=r-1;p<count;p++,r++)
+					{
+					 strcpy(cart1.name,prod[(s1+118)-1].name);
+					 cart1.price=prod[(s1+118)-1].price;
+					}
+				    }
+				    cash_memo();
+			     }//close 2 switch 2 case
+			     break;
+			     default:cout<<"Invalid choice";
+			  }//close 2 switch
+		       }//close 1 switch 1 case
+		       break;
+		       case 2:
+		       {
+			    delay(500);
+			    clrscr();//1
+			    delay(500);
+			    cout<<"\n\tMens >>Footwear \n";
+			    delay(500);
+			    cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+			    for(d=133,h=0;d<148;d++,h++)
+			    {
+			       delay(500);
+			       cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+			    }
+			    cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+			    cin>>s1;
+			    cout<<endl<<endl<<"...Your order has been successfully placed..";
+			     if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10)
+			       {
+				 for(int p=r-1;p<count;p++,r++)
+				 {
+				  strcpy(cart1.name,prod[(s1+133)-1].name);
+				  cart1.price=prod[(s1+133)-1].price;
+				 }
+			      }
+			      cash_memo();
+		       }//close 1 switch 2 case
+		       break;
+		       default:cout<<"Invalid choice";
+		   }//close 1 switch
+		}
+		break;
+	 case 3:{
+		  delay(500);
+		  clrscr();
+		  delay(500);
+		  cout<<"\n\tWomen >> \n";
+		  delay(500);
+		  cout<<"\n\t\t\t1.Clothing\n";
+		  delay(500);
+		  cout<<"\n\t\t\t2.Footwear\n";
+		  delay(500);
+		  cout<<"\n\tENTER CHOICE:";
+		  delay(500);
+		  cin>>k;
+		  switch(k)//open 1 switch
+		  {
+		       case 1:
+		       {
+			   delay(500);
+			   clrscr();
+			   delay(500);
+			   cout<<"\n\tWomens >>Clothing \n";
+			   delay(500);
+			   cout<<"\n\t\t\t1.Tops And Tunics \n";
+			   delay(500);
+			   cout<<"\n\t\t\t2.Saries \n";
+			   delay(500);
+			   cout<<"\n\t\t\t3.Dresses And Skirts \n";
+			   delay(500);
+			   cout<<"\n\t\t\t4.Jeans\n";
+			   delay(500);
+			   cout<<"\n\tENTER CHOICE:";
+			   delay(500);
+			   cin>>l;
+			   switch(l)//open 2 switch
+			   {
+			      case 1:
+			      {
+				 delay(500);
+				 clrscr();//2
+				 delay(500);
+				 cout<<"\n\tWomens >>Clothing>>Tops And Tunics \n";
+				 delay(500);
+				 cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+				 for(d=148,h=0;d<163;d++,h++)
+				 {
+				    delay(500);
+				    cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+				 }
+				 cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+				 cin>>s1;
+				 cout<<endl<<endl<<"...Your order has been successfully placed..";
+				 if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10||s1==11||s1==12||s1==13||s1==14||s1==15||s1==16)
+				 {
+				   for(int p=r-1;p<count;p++,r++)
+				   {
+					 strcpy(cart1.name,prod[(s1+148)-1].name);
+					 cart1.price=prod[(s1+148)-1].price;
+				   }
+				 }
+				 cash_memo();
+			      }//close 2 switch 1 case
+			      break;
+			      case 2:
+			      {
+				 delay(500);
+				 clrscr();//2
+				 delay(500);
+				 cout<<"\n\tWomens >>Clothing>>Saries \n";
+				 delay(500);
+				 cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+				 for(d=163,h=0;d<178;d++,h++)
+				 {
+				    delay(500);
+				    cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+				 }
+				 cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+				 cin>>s1;
+				 cout<<endl<<endl<<"...Your order has been successfully placed..";
+				 if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10||s1==11||s1==12||s1==13||s1==14||s1==15)
+				 {
+				    for(int p=r-1;p<count;p++,r++)
+				    {
+					 strcpy(cart1.name,prod[(s1+163)-1].name);
+					 cart1.price=prod[(s1+163)-1].price;
+				    }
+				 }
+				 cash_memo();
+			      }//close 2 switch 2 case
+			      break;
+			      case 3:
+			      {
+				 delay(500);
+				 clrscr();//2
+				 delay(500);
+				 cout<<"\n\tWomens >>Clothing>>Dresses And Skirt \n";
+				 delay(500);
+				 cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+				 for(d=178,h=0;d<193;d++,h++)
+				 {
+				    delay(500);
+				    cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+				 }
+				 cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+				 cin>>s1;
+				 cout<<endl<<endl<<"...Your order has been successfully placed..";
+				 if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10||s1==11||s1==12||s1==13||s1==14||s1==15)
+				 {
+				      for(int p=r-1;p<count;p++,r++)
+				      {
+					 strcpy(cart1.name,prod[(s1+178)-1].name);
+					 cart1.price=prod[(s1+178)-1].price;
+				      }
+				 }
+				 cash_memo();
+			      }//close 2 switch 3 case
+			      break;
+			      case 4:
+			      {
+				 delay(500);
+				 clrscr();//2
+				 delay(500);
+				 cout<<"\n\tWomens >>Clothing>>Jeans \n";
+				 delay(500);
+				 cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+				 for(d=193,h=0;d<205;d++,h++)
+				 {
+				    delay(500);
+				    cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+				 }
+				 cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+				 cin>>s1;
+				 cout<<endl<<endl<<"...Your order has been successfully placed..";
+				 if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10||s1==11||s1==12)
+				 {
+				     for(int p=r-1;p<count;p++,r++)
+				     {
+					 strcpy(cart1.name,prod[(s1+193)-1].name);
+					 cart1.price=prod[(s1+193)-1].price;
+				     }
+				 }
+				 cash_memo();
+			      }//close 2 switch 4 case
+			      break;
+			      default:cout<<"Invalid choice";
+			   }//close 2 switch
+		       }//close 1 switch 1 case
+		       break;
+		       case 2:
+		       {
+			    delay(500);
+			    clrscr();//1
+			    char n;
+			    delay(500);
+			    cout<<"\n\tWomens >>Footwear \n";
+			    delay(500);
+			    cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+			    for(d=205,h=0;d<220;d++,h++)
+			    {
+			       delay(500);
+			       cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+			    }
+			    cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+			    cin>>s1;
+			    cout<<endl<<endl<<"...Your order has been successfully placed..";
+			    if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10||s1==11||s1==12||s1==13||s1==14||s1==15)
+			    {
+				 for(int p=r-1;p<count;p++,r++)
+				 {
+				    strcpy(cart1.name,prod[(s1+205)-1].name);
+				    cart1.price=prod[(s1+205)-1].price;
+				 }
+			     }
+			     cash_memo();
+			    delay(500);
+			    cout<<"\n\tFor more press 'N' ";
+			    delay(500);
+			    cin>>n;
+			    if(n=='N'||n=='n')
+			    {
+			       delay(500);
+			       cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+			       for(d=220,h=15;d<235;d++,h++)
+			       {
+				  delay(500);
+				  cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+			       }
+			       cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+			       cin>>s1;
+			       cout<<endl<<endl<<"...Your order has been successfully placed..";
+			       if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10||s1==11||s1==12||s1==13||s1==14||s1==15)
+			       {
+				   for(int p=r-1;p<count;p++,r++)
+				   {
+				      strcpy(cart1.name,prod[(s1+220)-1].name);
+				      cart1.price=prod[(s1+220)-1].price;
+				   }
+			       }
+			       cash_memo();
+			    }
+		       }//close 1 switch 2 case
+		       break;
+		       default:cout<<"Invalid choice";
+		  }
+		}
+		break;
+	 case 4:{
+		   delay(500);
+		   clrscr();
+		   delay(500);
+		   cout<<"\n\tBooks >> \n";
+		   delay(500);
+		   cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(45)<<"Price\n\n";
+		   for(d=235,h=0;d<245;d++,h++)
+		   {
+		     delay(500);
+		     cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+		   }
+		   cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+		   cin>>s1;
+		   cout<<endl<<endl<<"...Your order has been successfully placed..";
+		   if(s1>=1&&s1<=10)
+		   {
+		       for(int p=r-1;p<count;p++,r++)
+		       {
+			    strcpy(cart1.name,prod[(s1+235)-1].name);
+			    cart1.price=prod[(s1+235)-1].price;
+		       }
+		   }
+		   cash_memo();
+		}
+		break;
+	 case 5:{
+		  delay(500);
+		  clrscr();
+		  delay(500);
+		  cout<<"\n\tMedia >> \n";
+		  delay(500);
+		  cout<<"\n\t\t\t1.Movies\n";
+		  delay(500);
+		  cout<<"\n\t\t\t2.Games\n";
+		  delay(500);
+		  cout<<"\n\tENTER CHOICE:";
+		  delay(500);
+		  cin>>m;
+		  switch(m)//open 1 switch
+		  {
+		       case 1:
+		       {
+			    delay(500);
+			    clrscr();
+			    delay(500);
+			    cout<<"\n\tMedia >>Movies \n";
+			    delay(500);
+			    cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+			    for(d=245,h=0;d<265;d++,h++)
+			    {
+			       delay(500);
+			       cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+			    }
+			    cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+			    cin>>s1;
+			    cout<<endl<<endl<<"...Your order has been successfully placed..";
+			    if(s1==1||s1==2||s1==3||s1==4||s1==5||s1==6||s1==7||s1==8||s1==9||s1==10||s1==11||s1==12||s1==13||s1==14||s1==15||s1==16||s1==17||s1==18||s1==19||s1==20)
+			    {
+				 for(int p=r-1;p<count;p++,r++)
+				 {
+					 strcpy(cart1.name,prod[(s1+245)-1].name);
+					 cart1.price=prod[(s1+245)-1].price;
+				 }
+			    }
+			    cash_memo();
+		       }
+		       break;
+		       case 2:
+		       {
+			    delay(500);
+			    clrscr();//1
+			    delay(500);
+			    cout<<"\n\tMedia >>Games \n";
+			    delay(500);
+			    cout<<"\nSr.no"<<setw(30)<<"Product"<<setw(37)<<"Price\n\n";
+			    for(d=265,h=0;d<285;d++,h++)
+			    {
+			       delay(500);
+
+			       cout<<h+1<<setw(5)<<"\t"<<prod[d].name<<"\t "<<prod[d].price<<endl;
+			    }
+			    cout<<endl<<endl<<"Enter the corresponding serial number to place your order : " <<endl;
+			    cin>>s1;
+			    cout<<endl<<endl<<"...Your order has been successfully placed..";
+			    if(s1>=1&&s1<=20)
+			    {
+			       for(int p=r-1;p<count;p++,r++)
+			       {
+				 strcpy(cart1.name,prod[(s1+265)-1].name);
+				 cart1.price=prod[(s1+265)-1].price;
+			       }
+			    }
+			    cash_memo();
+		       }
+		       break;
+		       default:cout<<"Invalid choice";
+		}
+		break;
+		}
+
+	 default:cout<<"Invalid choice";
+	      }
+
+}
+
+void sign_in()
+  {  clrscr();
+     delay(500);
+     cout<<"\t*****   *       ***  ** *   *   *     *     ****    *****\n";
+     cout<<"\t*       *        *   *   *  * *     *   *   *   *     * \n";
+     cout<<"\t***     *        *   ** *   * *     *****   ****      *\n";
+     cout<<"\t*       *****   ***  *      *   *   *   *   *   *     * \n";
+     cout<<"\t\t\t..The Offline Megastore..\n";
+     delay(500);
+     char Temp_email_id[40], Temp_password[10];
+     cout<<"\n\n\t\t\tSign in.\n";
+     CUSTOMER c1;
+     fstream f2;
+     f2.open("account.txt",ios::in|ios::binary);
+     cout<<"\tEmail Id:";
+     gets(Temp_email_id);
+     cout<<endl;
+     cout<<"\tPassword:";
+     gets(Temp_password);
+     while(!f2.eof())
+     {
+       f2.read((char*)&c1,sizeof(c1));
+
+       if((strcmp(Temp_email_id,c1.reid())==0)&&(strcmp(Temp_password,c1.rpass())==0))
+       {
+	 f2.seekg((-1)*sizeof(c1),ios::cur);
+	 c1.displaydata();
+	 main_pr();
+	 break;
+       }
+     }
+       /*if(flag==0)
+       {
+       cout<<"Account does not exist.\n";
+       }*/
+       f2.close();
+
+  }
+  void create_account()
+  { clrscr();
+    cout<<"\t*****   *       ***  ** *   *   *     *     ****    *****\n";
+    cout<<"\t*       *        *   *   *  * *     *   *   *   *     *\n";
+    cout<<"\t***     *        *   ** *   * *     *****   ****      *\n";
+    cout<<"\t*       *****   ***  *      *   *   *   *   *   *     * \n";
+    cout<<"\t\t\t..The Offline Megastore..\n";
+    delay(500);
+    cout<<"\n\n\t\t\tCreate A New Account.\n";
+    CUSTOMER c1;
+    fstream f;
+    f.open("account.txt",ios::app|ios::binary);
+    c1.readdata();
+
+    f.write((char*)&c1,sizeof(c1));
+    f.close();
+    cout<<"\n\n\t\t\tAccount has been created.";
+    sign_in();
+  }
+void main()
+{
+    clrscr();
+    delay(500);
+    cout<<"\t*****   *       ***  ** *   *   *     *     ****    *****\n";
+    cout<<"\t*       *        *   *   *  * *     *   *   *   *     * \n";
+    cout<<"\t***     *        *   ** *   * *     *****   ****      *\n";
+    cout<<"\t*       *****   ***  *      *   *   *   *   *   *     * \n";
+    cout<<"\t\t\t..The Offline Megastore..\n";
+    delay(500);
+    int ac;
+    cout<<"\n\n\t1.Create Account"<<setw(15);
+    delay(500);
+    cout<<"\t2.Sign In"<<setw(15)<<endl;
+    delay(500);
+
+    cout<<"\nENTER CHOICE:";
+    cin>>ac;
+    switch(ac)
+    {
+       case 1:
+	     {
+		create_account();
+	     }
+	     break;
+       case 2:
+	     {
+		sign_in();
+	     }
+	     break;
+    }
+   getch();
+   }
